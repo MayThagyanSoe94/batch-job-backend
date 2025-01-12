@@ -10,19 +10,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    @Query("SELECT t FROM Transaction t WHERE " +
-            "(:customerId IS NULL OR t.customerId = :customerId) AND " +
-            "(:accountNumber IS NULL OR t.accountNumber LIKE %:accountNumber%) AND " +
-            "(:description IS NULL OR t.description LIKE %:description%)")
+    @Query("SELECT t FROM Transaction t WHERE "
+            + " (:customerId IS NULL OR t.customerId = :customerId) AND "
+            + " (:accountNumber IS NULL OR t.accountNumber LIKE %:accountNumber%) AND "
+            + " (:description IS NULL OR t.description LIKE %:description%)")
     Page<Transaction> findTransactionByCriteria(@Param("customerId") String customerId,
                                                 @Param("accountNumber") String accountNumber,
                                                 @Param("description") String description,
                                                 Pageable pageable);
 
-    @Query("SELECT count(t) FROM Transaction t WHERE " +
-            "(:customerId IS NULL OR t.customerId = :customerId) AND " +
-            "(:accountNumber IS NULL OR t.accountNumber LIKE %:accountNumber%) AND " +
-            "(:description IS NULL OR t.description LIKE %:description%)")
+    @Query("SELECT count(t) FROM Transaction t WHERE "
+            + " (:customerId IS NULL OR t.customerId = :customerId) AND "
+            + " (:accountNumber IS NULL OR t.accountNumber LIKE %:accountNumber%) AND "
+            + " (:description IS NULL OR t.description LIKE %:description%)")
     long countTransactionByCriteria(@Param("customerId") String customerId,
                                     @Param("accountNumber") String accountNumber,
                                     @Param("description") String description);
